@@ -19,7 +19,11 @@ def add_blank_to_end(pdffiles: list) -> list:
         pdf_file = PdfFileReader(pdf_in)
         output = PdfFileWriter()
         output.appendPagesFromReader(pdf_file)
-        output.addBlankPage()
+        totalpages = pdf_file.numPages
+        if totalpages % 2 == 0:# if/else statement checks for even or odd pages in input PDF, if even, it skips adding blank page
+            pass
+        else:
+            output.addBlankPage()
         names.append(f'b{f}')
         outputStream = open(f'b{f}', 'wb')
         output.write(outputStream)
